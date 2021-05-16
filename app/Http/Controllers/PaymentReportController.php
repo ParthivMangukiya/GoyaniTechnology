@@ -25,7 +25,7 @@ class PaymentReportController extends Controller
     }
 
     public function getPolishPaymentData(Request $request) {
-        DB::connection('sqlsrv')->statement('SET ANSI_NULLS, QUOTED_IDENTIFIER, CONCAT_NULL_YIELDS_NULL, ANSI_WARNINGS, ANSI_PADDING ON');
+        DB::connection('sqlsrv')->statement('SET NOCOUNT, ANSI_NULLS, QUOTED_IDENTIFIER, CONCAT_NULL_YIELDS_NULL, ANSI_WARNINGS, ANSI_PADDING ON');
         $results = DB::connection('sqlsrv')->select('Exec dbo.PolishPaymentOSReport');
         return response()->json($results);
     }

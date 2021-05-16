@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix'=>'report','middleware' => ['config']],function(){
+Route::group(['prefix'=>'report','middleware' => ['auth:api','config']],function(){
     Route::post('/roughPayment','PaymentReportController@getRoughPaymentData');
     Route::post('/polishPayment','PaymentReportController@getPolishPaymentData');
     Route::post('/roughReceipt','ReceiptReportController@getRoughReceiptData');

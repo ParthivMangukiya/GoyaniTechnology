@@ -25,25 +25,25 @@ class StockReportController extends Controller
     }
 
     public function getPolishStockData(Request $request) {
-        DB::connection('sqlsrv')->statement('SET ANSI_NULLS, QUOTED_IDENTIFIER, CONCAT_NULL_YIELDS_NULL, ANSI_WARNINGS, ANSI_PADDING ON');
+        DB::connection('sqlsrv')->statement('SET NOCOUNT, ANSI_NULLS, QUOTED_IDENTIFIER, CONCAT_NULL_YIELDS_NULL, ANSI_WARNINGS, ANSI_PADDING ON');
         $results = DB::connection('sqlsrv')->select('Exec dbo.GetPolishStockReports');
         return response()->json($results);
     }
 
     public function getShapeStockData(Request $request) {
-        DB::connection('sqlsrv')->statement('SET ANSI_NULLS, QUOTED_IDENTIFIER, CONCAT_NULL_YIELDS_NULL, ANSI_WARNINGS, ANSI_PADDING ON');
+        DB::connection('sqlsrv')->statement('SET NOCOUNT, ANSI_NULLS, QUOTED_IDENTIFIER, CONCAT_NULL_YIELDS_NULL, ANSI_WARNINGS, ANSI_PADDING ON');
         $results = DB::connection('sqlsrv')->select('Exec dbo.GetShapeStockReports');
         return response()->json($results);
     }
 
     public function getPendingKapanStockData(Request $request) {
-        DB::connection('sqlsrv')->statement('SET ANSI_NULLS, QUOTED_IDENTIFIER, CONCAT_NULL_YIELDS_NULL, ANSI_WARNINGS, ANSI_PADDING ON');
+        DB::connection('sqlsrv')->statement('SET NOCOUNT, ANSI_NULLS, QUOTED_IDENTIFIER, CONCAT_NULL_YIELDS_NULL, ANSI_WARNINGS, ANSI_PADDING ON');
         $results = DB::connection('sqlsrv')->select('Exec dbo.GetPendingKapanStockReports');
         return response()->json($results);
     }
 
     public function getKapanStockData(Request $request) {
-        DB::connection('sqlsrv')->statement('SET ANSI_NULLS, QUOTED_IDENTIFIER, CONCAT_NULL_YIELDS_NULL, ANSI_WARNINGS, ANSI_PADDING ON');
+        DB::connection('sqlsrv')->statement('SET NOCOUNT, ANSI_NULLS, QUOTED_IDENTIFIER, CONCAT_NULL_YIELDS_NULL, ANSI_WARNINGS, ANSI_PADDING ON');
         $results = DB::connection('sqlsrv')->select('Exec dbo.GetKapanStockReports');
         return response()->json($results);
     }

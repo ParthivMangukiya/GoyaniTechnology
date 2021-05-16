@@ -36,7 +36,5 @@ class RolesTableSeeder extends Seeder
                 'updated_at' => '2021-05-16 06:06:16',
             ),
         ));
-        
-        
     }
 }
