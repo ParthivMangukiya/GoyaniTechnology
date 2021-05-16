@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid mt-2">
-    <div class="row row-cols-md-3 row-cols-1" 
+    <div class="row row-cols-1" 
     v-for="(row, index) in data"
     :key="index">
       <div class="col p-2">
@@ -12,21 +12,29 @@
                   {{row.PartyName}}
                 </div>
                 <div class="fw-bold col-6">
-                  ₹ {{getDouble(row.PND)}}
+                  ₹ {{row.PND | fixed2}}
                 </div>
               </div>
               <div class="row border-bottom">
-                <div class="col-6">
-                  {{row.BROKER}}
+                <div class="col-6" :class="{ 'text-danger': row.DayDiff > 0 }">
+                  {{row.DayDiff}} days
                 </div>
                 <div class="col-6">
-                  {{getDouble(row.Carats)}}, ₹{{getDouble(row.Rate)}}
+                  {{row.Carats | fixed2}}, ₹{{row.Rate | fixed2}}
                 </div>
               </div>
               <div class="collapse container-fluid p-0" :id="'collapseExample' + index" >
+                <div class="row bottom-border">
+                  <div class="col-6">
+                    {{row.Broker}}
+                  </div>
+                  <div class="col-6">
+                    {{row.BrkPer | fixed2}}%
+                  </div>
+                </div>
                 <div class="row">
                   <div class="col-6">
-                    {{formatDate(row.InvoiceDate)}}
+                    {{row.InvoiceDate | date}}
                   </div>
                   <div class="col-6">
                     {{row.PurchaseDays}} days
@@ -34,7 +42,7 @@
                 </div>
                 <div class="row bottom-border">
                   <div class="col-6">
-                    {{formatDate(row.DueDate)}}
+                    {{row.DueDate | date}}
                   </div>
                   <div class="col-6">
                     {{row.TransRsType}}, {{row.PayExchangeRate}}
@@ -42,10 +50,10 @@
                 </div>
                 <div class="row bottom-border">
                   <div class="col-6">
-                    ₹ {{getDouble(row.PAID)}}
+                    ₹ {{row.PAID | fixed2}}
                   </div>
                   <div class="col-6">
-                     ₹ {{getDouble(row.Total)}}
+                     ₹ {{row.Total | fixed2}}
                   </div>
                 </div>
               </div>
@@ -71,7 +79,7 @@
 <script>
 
 export default {
-  name: "polish-payment-report",
+  name: "rough-receipt-report",
   props: [],
   components: {
   },
@@ -96,34 +104,10 @@ export default {
       return str.trim();
     },
     fetchData() {
-      axios.post('api/report/polishPayment').then(response => {
+      axios.post('api/report/polishReceipt').then(response => {
         this.data = response.data
       });
     },
-    filteredData(row) {
-      var requiredData = {
-        "PartyName": row.PartyName,
-        "Broker": row.BROKER,
-        "Carats": row.Carats,
-        "Total": row.Total,
-        // "Broker": this.data
-      };
-      return requiredData;
-    },
-    getDouble(data) {
-      return parseFloat(data).toFixed(2)
-    },
-    getDouble(data) {
-      return parseFloat(data).toFixed(2)
-    },
-    formatDate(date) {
-      let dateTimeParts = date.split(/[- :]/)
-      dateTimeParts[1]--
-      let datejs = new Date(...dateTimeParts)
-
-      var options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-      return datejs.toLocaleDateString("en-IN", options)
-    }
   },
 };
 </script>

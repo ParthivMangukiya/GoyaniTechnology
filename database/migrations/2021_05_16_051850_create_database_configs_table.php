@@ -15,6 +15,12 @@ class CreateDatabaseConfigsTable extends Migration
     {
         Schema::create('database_configs', function (Blueprint $table) {
             $table->id();
+            $table->string('configname');
+            $table->string('host');
+            $table->string('port');
+            $table->string('database');
+            $table->string('username');
+            $table->string('password');
             $table->timestamps();
         });
     }

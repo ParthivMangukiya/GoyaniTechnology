@@ -11,7 +11,6 @@
         <title>Lemon Impex</title>
 
         @section('css')
-            <link href="{{ asset('css/responsive.css')}}" rel="stylesheet">
             <link href="{{ asset('css/app.css')}}" rel="stylesheet">
         @show
     </head>

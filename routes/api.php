@@ -18,7 +18,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix'=>'report'],function(){
-    Route::post('/roughPayment','ReportController@getRoughPaymentData');
-    Route::post('/polishPayment','ReportController@getPolishPaymentData');
+Route::group(['prefix'=>'report','middleware' => ['config']],function(){
+    Route::post('/roughPayment','PaymentReportController@getRoughPaymentData');
+    Route::post('/polishPayment','PaymentReportController@getPolishPaymentData');
+    Route::post('/roughReceipt','ReceiptReportController@getRoughReceiptData');
+    Route::post('/polishReceipt','ReceiptReportController@getPolishReceiptData');
+    Route::post('/roughStock','StockReportController@getRoughStockData');
+    Route::post('/polishStock','StockReportController@getPolishStockData');
+    Route::post('/shapeStock','StockReportController@getShapeStockData');
+    Route::post('/pendingKapanStock','StockReportController@getPendingKapanStockData');
+    Route::post('/kapanStock','StockReportController@getKapanStockData');
 });

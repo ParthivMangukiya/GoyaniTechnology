@@ -7,18 +7,14 @@ use App\Models\Event;
 use Illuminate\Support\Facades\DB;
 use Debugbar;
 
-class ReportController extends Controller
+class PaymentReportController extends Controller
 {
     public function showPage(Request $request) {
-        $data = DB::select('Exec dbo.RoughPaymentOSReport');
-        Debugbar::info($data);
-        return view('report',[
-            'data' => $data
-        ]);
+        return view('paymentreport');
     }
 
     public function getRoughPaymentData(Request $request) {
-        $results = DB::select('Exec dbo.RoughPaymentOSReport');
+        $results = DB::connection('sqlsrv')->select('Exec dbo.RoughPaymentOSReport');
         // $page = request('page', 1);
         // $pageSize = 2;
         // $offset = ($page * $pageSize) - $pageSize;
@@ -29,7 +25,8 @@ class ReportController extends Controller
     }
 
     public function getPolishPaymentData(Request $request) {
-        $data = DB::select('Exec dbo.PolishPaymentOSReport');
-        return response()->json($data);
+        DB::connection('sqlsrv')->statement('SET ANSI_NULLS, QUOTED_IDENTIFIER, CONCAT_NULL_YIELDS_NULL, ANSI_WARNINGS, ANSI_PADDING ON');
+        $results = DB::connection('sqlsrv')->select('Exec dbo.PolishPaymentOSReport');
+        return response()->json($results);
     }
 }

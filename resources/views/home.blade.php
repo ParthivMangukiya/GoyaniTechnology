@@ -14,7 +14,29 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    <div class="container">
+                        <div class="row">
+                            <a href="{{route('paymentReport')}}" class="col-12">
+                                <div class="d-grid gap-2">
+                                    <button type="button" class="btn btn-block btn-primary text-center p-2 my-2">Payment Report</button>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="row">
+                            <a href="{{route('receiptReport')}}" class="col-12">
+                                <div class="d-grid gap-2">
+                                    <button type="button" class="btn btn-block btn-primary text-center p-2 my-2">Receipt Payment</button>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="row">
+                            <a href="{{route('stockReport')}}" class="col-12">
+                                <div class="d-grid gap-2">
+                                    <button type="button" class="btn btn-block btn-primary text-center p-2 my-2">Stock Payment</button>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

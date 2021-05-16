@@ -21,10 +21,12 @@ Route::group(['prefix' => 'admin'], function () {
     // Route::get('/{x?}', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 
-Route::group(['middleware' => ['auth']],function(){
+Route::group(['middleware' => ['auth','config']],function(){
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/report', 'ReportController@showPage')->name('report');
-    Route::get('/{x?}', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/paymentreport', 'PaymentReportController@showPage')->name('paymentReport');
+    Route::get('/stockreport', 'StockReportController@showPage')->name('stockReport');
+    Route::get('/receiptreport', 'ReceiptReportController@showPage')->name('receiptReport');
+    Route::get('/{x?}', 'HomeController@index');
 });
 
 

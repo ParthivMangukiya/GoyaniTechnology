@@ -22,6 +22,7 @@ class WebsiteUser extends Authenticatable
         'name',
         'email',
         'password',
+        'database_config_id'
     ];
 
     /**
@@ -42,4 +43,8 @@ class WebsiteUser extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function databaseConfig() {
+    	return $this->belongsTo('App\Models\DatabaseConfig','database_config_id');
+    }
 }
