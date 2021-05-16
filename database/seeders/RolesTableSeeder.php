@@ -15,7 +15,7 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         
-
+        \DB::table('users')->delete();
         \DB::table('roles')->delete();
         
         \DB::table('roles')->insert(array (
