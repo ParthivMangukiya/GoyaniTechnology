@@ -14,6 +14,7 @@ class ReceiptReportController extends Controller
     }
 
     public function getRoughReceiptData(Request $request) {
+        DB::connection('sqlsrv')->statement('SET NOCOUNT, ANSI_NULLS, QUOTED_IDENTIFIER, CONCAT_NULL_YIELDS_NULL, ANSI_WARNINGS, ANSI_PADDING ON');
         $results = DB::connection('sqlsrv')->select('Exec dbo.RoughReceiptOSReport');
         // $page = request('page', 1);
         // $pageSize = 2;
@@ -25,7 +26,7 @@ class ReceiptReportController extends Controller
     }
 
     public function getPolishReceiptData(Request $request) {
-        DB::connection('sqlsrv')->statement('SET ANSI_NULLS, QUOTED_IDENTIFIER, CONCAT_NULL_YIELDS_NULL, ANSI_WARNINGS, ANSI_PADDING ON');
+        DB::connection('sqlsrv')->statement('SET NOCOUNT, ANSI_NULLS, QUOTED_IDENTIFIER, CONCAT_NULL_YIELDS_NULL, ANSI_WARNINGS, ANSI_PADDING ON');
         $results = DB::connection('sqlsrv')->select('Exec dbo.PolishReceiptOSReport');
         return response()->json($results);
     }

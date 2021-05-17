@@ -104,7 +104,7 @@ export default {
       return str.trim();
     },
     fetchData() {
-      axios.post('api/report/polishReceipt').then(response => {
+      axios.post('api/report/roughPayment').then(response => {
         this.data = response.data
       });
     },
