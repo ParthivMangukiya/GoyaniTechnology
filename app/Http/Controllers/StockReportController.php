@@ -14,37 +14,53 @@ class StockReportController extends Controller
     }
 
     public function getRoughStockData(Request $request) {
-        $results = DB::connection('sqlsrv')->select('Exec dbo.GetRoughStockReports');
-        // $page = request('page', 1);
-        // $pageSize = 2;
-        // $offset = ($page * $pageSize) - $pageSize;
-        // $data = array_slice($results, $offset, $pageSize, true);
-        // $paginator = new \Illuminate\Pagination\LengthAwarePaginator($data, count($data), $pageSize, $page);
-      
+        $this->setupDB();
+        $query = "Exec dbo.GetRoughStockReports
+        @Branch_Id = 0, 
+        @RsType = '', 
+        @FromDate = '',
+        @ToDate	 = '',
+        @company_year_id = 0,
+        @Role_Id = ''";
+        $results = DB::connection('sqlsrv')->select($query);
         return response()->json($results);
     }
 
     public function getPolishStockData(Request $request) {
-        DB::connection('sqlsrv')->statement('SET NOCOUNT, ANSI_NULLS, QUOTED_IDENTIFIER, CONCAT_NULL_YIELDS_NULL, ANSI_WARNINGS, ANSI_PADDING ON');
-        $results = DB::connection('sqlsrv')->select('Exec dbo.GetPolishStockReports');
+        $this->setupDB();
+        $query = "Exec dbo.GetPolishStockReports
+        @Branch_Id = 0, 
+        @RsType = '', 
+        @FromDate = '',
+        @ToDate	 = '',
+        @ReportType = 'Detail',
+        @company_year_id = 0,
+        @Role_Id = ''";
+        $results = DB::connection('sqlsrv')->select($query);
         return response()->json($results);
     }
 
     public function getShapeStockData(Request $request) {
-        DB::connection('sqlsrv')->statement('SET NOCOUNT, ANSI_NULLS, QUOTED_IDENTIFIER, CONCAT_NULL_YIELDS_NULL, ANSI_WARNINGS, ANSI_PADDING ON');
-        $results = DB::connection('sqlsrv')->select('Exec dbo.GetShapeStockReports');
+        $this->setupDB();
+        $query = "Exec dbo.GetShapeStockReports
+        @FromDate = '',
+        @ToDate	 = '',
+        @Role_Id = ''";
+        $results = DB::connection('sqlsrv')->select($query);
         return response()->json($results);
     }
 
     public function getPendingKapanStockData(Request $request) {
-        DB::connection('sqlsrv')->statement('SET NOCOUNT, ANSI_NULLS, QUOTED_IDENTIFIER, CONCAT_NULL_YIELDS_NULL, ANSI_WARNINGS, ANSI_PADDING ON');
-        $results = DB::connection('sqlsrv')->select('Exec dbo.GetPendingKapanStockReports');
+        $this->setupDB();
+        $query = "Exec dbo.GetPendingKapanStockReports";
+        $results = DB::connection('sqlsrv')->select($query);
         return response()->json($results);
     }
 
     public function getKapanStockData(Request $request) {
-        DB::connection('sqlsrv')->statement('SET NOCOUNT, ANSI_NULLS, QUOTED_IDENTIFIER, CONCAT_NULL_YIELDS_NULL, ANSI_WARNINGS, ANSI_PADDING ON');
-        $results = DB::connection('sqlsrv')->select('Exec dbo.GetKapanStockReports');
+        $this->setupDB();
+        $query = "Exec dbo.GetKapanStockReports";
+        $results = DB::connection('sqlsrv')->select($query);
         return response()->json($results);
     }
 }

@@ -18,14 +18,36 @@ class PaymentReportController extends Controller
     }
 
     public function getRoughPaymentData(Request $request) {
-        DB::connection('sqlsrv')->statement('SET NOCOUNT, ANSI_NULLS, QUOTED_IDENTIFIER, CONCAT_NULL_YIELDS_NULL, ANSI_WARNINGS, ANSI_PADDING ON');
-        $results = DB::connection('sqlsrv')->select('Exec dbo.RoughPaymentOSReport');
+        $this->setupDB();
+        $query = "Exec dbo.RoughPaymentOSReport
+        @Branch_Id = 0, 
+        @RsType = '', 
+        @Party_Id = 0,
+        @Broker_Id = 0,
+        @FromDate = '',
+        @ToDate	 = '',
+        @company_year_id = 0,
+        @Role_Id = '',
+        @OSFullPermission = 0,
+        @DueFilter = ''";
+        $results = DB::connection('sqlsrv')->select($query);
         return response()->json($results);
     }
 
     public function getPolishPaymentData(Request $request) {
-        DB::connection('sqlsrv')->statement('SET NOCOUNT, ANSI_NULLS, QUOTED_IDENTIFIER, CONCAT_NULL_YIELDS_NULL, ANSI_WARNINGS, ANSI_PADDING ON');
-        $results = DB::connection('sqlsrv')->select('Exec dbo.PolishPaymentOSReport');
+        $this->setupDB();
+        $query = "Exec dbo.PolishPaymentOSReport
+        @Branch_Id = 0, 
+        @RsType = '', 
+        @Party_Id = 0,
+        @Broker_Id = 0,
+        @FromDate = '',
+        @ToDate	 = '',
+        @company_year_id = 0,
+        @Role_Id = '',
+        @OSFullPermission = 0,
+        @DueFilter = ''";
+        $results = DB::connection('sqlsrv')->select($query);
         return response()->json($results);
     }
 }
