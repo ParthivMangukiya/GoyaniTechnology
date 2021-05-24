@@ -28,14 +28,7 @@ class StockReportController extends Controller
 
     public function getPolishStockData(Request $request) {
         $this->setupDB();
-        $query = "Exec dbo.GetPolishStockReports
-        @Branch_Id = 0, 
-        @RsType = '', 
-        @FromDate = '',
-        @ToDate	 = '',
-        @ReportType = 'Detail',
-        @company_year_id = 0,
-        @Role_Id = ''";
+        $query = "Exec dbo.GetPolishStockReports";
         $results = DB::connection('sqlsrv')->select($query);
         return response()->json($results);
     }

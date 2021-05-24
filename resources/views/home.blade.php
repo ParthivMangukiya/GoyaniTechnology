@@ -32,7 +32,7 @@
                         <div class="row">
                             <a href="{{route('stockReport')}}" class="col-12">
                                 <div class="d-grid gap-2">
-                                    <button type="button" class="btn btn-block btn-primary text-center p-2 my-2">Stock Payment</button>
+                                    <button type="button" class="btn btn-block btn-primary text-center p-2 my-2">Stock</button>
                                 </div>
                             </a>
                         </div>
