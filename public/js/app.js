@@ -28981,7 +28981,7 @@ var render = function() {
                         _vm._v(
                           "\n                  " +
                             _vm._s(row.TransRsType) +
-                            ", " +
+                            " " +
                             _vm._s(row.PayExchangeRate) +
                             "\n                "
                         )
@@ -29166,7 +29166,7 @@ var render = function() {
                         _vm._v(
                           "\n                  " +
                             _vm._s(row.TransRsType) +
-                            ", " +
+                            " " +
                             _vm._s(row.PayExchangeRate) +
                             "\n                "
                         )
@@ -29352,7 +29352,7 @@ var render = function() {
                           "\n                  " +
                             _vm._s(row.TransRsType) +
                             ", " +
-                            _vm._s(row.PayExchangeRate) +
+                            _vm._s(row.RcvExchangeRate) +
                             "\n                "
                         )
                       ])
@@ -29362,7 +29362,7 @@ var render = function() {
                       _c("div", { staticClass: "col-6" }, [
                         _vm._v(
                           "\n                  ₹ " +
-                            _vm._s(_vm._f("fixed2")(row.PAID)) +
+                            _vm._s(_vm._f("fixed2")(row.REC)) +
                             "\n                "
                         )
                       ]),
@@ -29602,7 +29602,7 @@ var render = function() {
                           "\n                  " +
                             _vm._s(row.TransRsType) +
                             ", " +
-                            _vm._s(row.PayExchangeRate) +
+                            _vm._s(row.RcvExchangeRate) +
                             "\n                "
                         )
                       ])
@@ -29612,7 +29612,7 @@ var render = function() {
                       _c("div", { staticClass: "col-6" }, [
                         _vm._v(
                           "\n                  ₹ " +
-                            _vm._s(_vm._f("fixed2")(row.PAID)) +
+                            _vm._s(_vm._f("fixed2")(row.REC)) +
                             "\n                "
                         )
                       ]),

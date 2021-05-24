@@ -45,7 +45,7 @@
                     {{row.DueDate | date}}
                   </div>
                   <div class="col-6">
-                    {{row.TransRsType}}, {{row.PayExchangeRate}}
+                    {{row.TransRsType}} {{row.PayExchangeRate}}
                   </div>
                 </div>
                 <div class="row bottom-border">

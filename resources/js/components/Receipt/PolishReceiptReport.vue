@@ -45,12 +45,12 @@
                     {{row.DueDate | date}}
                   </div>
                   <div class="col-6">
-                    {{row.TransRsType}}, {{row.PayExchangeRate}}
+                    {{row.TransRsType}}, {{row.RcvExchangeRate}}
                   </div>
                 </div>
                 <div class="row bottom-border">
                   <div class="col-6">
-                    ₹ {{row.PAID | fixed2}}
+                    ₹ {{row.REC | fixed2}}
                   </div>
                   <div class="col-6">
                      ₹ {{row.Total | fixed2}}
