@@ -17,7 +17,7 @@
                 </div>
                 <div class="row">
                   <div class="col-6" :class="{ 'text-danger': row.DayDiff > 0 }">
-                    {{row.CurrCarats}} x {{row.Rate | fixed2}}
+                    {{row.CurrCarats | fixed2}} x {{row.Rate | fixed2}}
                   </div>
                   <div class="col-6">
                     ₹{{row.Amount | fixed2}}
