@@ -7,8 +7,6 @@ import PaymentReport from './components/Payment/PaymentReport.vue';
 import ReceiptReport from './components/Receipt/ReceiptReport.vue';
 import StockReport from './components/Stock/StockReport.vue';
 
-Vue.component('pagination', require('laravel-vue-pagination'));
-
 
 Vue.filter('fixed2', function (value) {
   return parseFloat(value).toFixed(2)

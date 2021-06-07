@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid mt-2">
     <div class="row row-cols-1" 
-    v-for="(row, index) in data"
+    v-for="(row, index) in filteredData"
     :key="index">
       <div class="col p-2">
           <div class="card">
@@ -41,10 +41,11 @@
 </style>
 
 <script>
-
+import {utilityMixin} from '../../utility.js';
 export default {
   name: "shape-stock-report",
-  props: [],
+  props: ['searchTerm'],
+  mixins: [utilityMixin],
   components: {
   },
   data() {
@@ -56,17 +57,11 @@ export default {
     this.fetchData()
   },
   computed: {
+    filteredData() {
+      return this.filterData(this.searchTerm, this.data, ['StockName', 'ShadeName', 'SizeName', 'NumberName'])
+    }
   },
   methods: {
-    getDataString(columns) {
-      var str = "";
-      columns.forEach((column) => {
-        if (!this.isBlank(column)) {
-          str = str + " " + column;
-        }
-      });
-      return str.trim();
-    },
     fetchData() {
       axios.post('api/report/polishStock').then(response => {
         this.data = response.data

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <report-filter @change="updateSearch"></report-filter>
     <div class="container-fluid">
         <div class="row justify-content-around">
             <button type="button" class="col-4 btn btn-primary p-2" @click="showRoughReport()">Rough</button>
@@ -7,8 +8,8 @@
         </div>
 
     </div>
-    <rough-receipt-report v-if="showRough"></rough-receipt-report>
-    <polish-receipt-report v-if="showPolish"></polish-receipt-report>
+    <rough-receipt-report v-if="showRough" :searchTerm="searchTerm"></rough-receipt-report>
+    <polish-receipt-report v-if="showPolish" :searchTerm="searchTerm"></polish-receipt-report>
   </div>
 </template>
 
@@ -17,6 +18,7 @@
 </style>
 
 <script>
+import ReportFilter from '../Filter/ReportFilter.vue';
 import RoughReceiptReport from './RoughReceiptReport.vue';
 import PolishReceiptReport from './PolishReceiptReport.vue';
 export default {
@@ -24,12 +26,14 @@ export default {
   props: [],
   components: {
     RoughReceiptReport,
-    PolishReceiptReport
+    PolishReceiptReport,
+    ReportFilter
   },
   data() {
     return {
       showRough: true,
-      showPolish: false
+      showPolish: false,
+      searchTerm: ""
     };
   },
   mounted() {
@@ -44,6 +48,9 @@ export default {
     showPolishReport() {
       this.showRough = false
       this.showPolish = true
+    },
+    updateSearch(searchTerm) {
+      this.searchTerm = searchTerm
     }
   },
 };

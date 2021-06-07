@@ -1,20 +1,20 @@
 <template>
   <div>
     <div class="container-fluid">
-        <div class="row justify-content-around">
-            <button type="button" class="col-auto btn btn-primary p-2" @click="showRoughReport()">Rough</button>
-            <button type="button" class="col-auto btn btn-primary p-2" @click="showPolishReport()">Polish</button>
-            <button type="button" class="col-auto btn btn-primary p-2" @click="showShapeReport()">Shape</button>
-            <button type="button" class="col-auto btn btn-primary p-2" @click="showKapanReport()">Kapan</button>
-            <button type="button" class="col-auto btn btn-primary p-2" @click="showPendingKapanReport()">PND Kapan</button>
-        </div>
-
+      <report-filter @change="updateSearch"></report-filter>
+      <div class="row justify-content-around">
+          <button type="button" class="col-auto btn btn-primary p-2" @click="showRoughReport()">Rough</button>
+          <button type="button" class="col-auto btn btn-primary p-2" @click="showPolishReport()">Polish</button>
+          <button type="button" class="col-auto btn btn-primary p-2" @click="showShapeReport()">Shape</button>
+          <button type="button" class="col-auto btn btn-primary p-2" @click="showKapanReport()">Kapan</button>
+          <button type="button" class="col-auto btn btn-primary p-2" @click="showPendingKapanReport()">PND Kapan</button>
+      </div>
     </div>
-    <rough-stock-report v-if="showRough"></rough-stock-report>
-    <polish-stock-report v-if="showPolish"></polish-stock-report>
-    <shape-stock-report v-if="showShape"></shape-stock-report>
-    <kapan-stock-report v-if="showKapan"></kapan-stock-report>
-    <pending-kapan-stock-report v-if="showPendingKapan"></pending-kapan-stock-report>
+    <rough-stock-report v-if="showRough" :searchTerm="searchTerm"></rough-stock-report>
+    <polish-stock-report v-if="showPolish" :searchTerm="searchTerm"></polish-stock-report>
+    <shape-stock-report v-if="showShape" :searchTerm="searchTerm"></shape-stock-report>
+    <kapan-stock-report v-if="showKapan" :searchTerm="searchTerm"></kapan-stock-report>
+    <pending-kapan-stock-report v-if="showPendingKapan" :searchTerm="searchTerm"></pending-kapan-stock-report>
   </div>
 </template>
 
@@ -23,6 +23,7 @@
 </style>
 
 <script>
+import ReportFilter from '../Filter/ReportFilter.vue';
 import RoughStockReport from './RoughStockReport.vue';
 import PolishStockReport from './PolishStockReport.vue';
 import ShapeStockReport from './ShapeStockReport.vue';
@@ -37,6 +38,7 @@ export default {
     ShapeStockReport,
     KapanStockReport,
     PendingKapanStockReport,
+    ReportFilter,
   },
   data() {
     return {
@@ -44,7 +46,8 @@ export default {
       showPolish: false,
       showShape: false,
       showPendingKapan: false,
-      showKapan: false
+      showKapan: false,
+      searchTerm: ""
     };
   },
   mounted() {
@@ -86,6 +89,9 @@ export default {
       this.showShape = false
       this.showPendingKapan = false
       this.showKapan = true
+    },
+    updateSearch(searchTerm) {
+      this.searchTerm = searchTerm
     }
   },
 };

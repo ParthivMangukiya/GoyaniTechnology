@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid mt-2">
     <div class="row row-cols-1" 
-    v-for="(row, index) in data"
+    v-for="(row, index) in filteredData"
     :key="index">
       <div class="col p-2">
         <div class="card">
@@ -78,31 +78,27 @@
 
 <script>
 
+import {utilityMixin} from '../../utility.js';
 export default {
   name: "rough-payment-report",
-  props: [],
+  mixins: [utilityMixin],
+  props: ['searchTerm'],
   components: {
   },
   data() {
     return {
-      data: {},
+      data: [],
     };
   },
   mounted() {
     this.fetchData()
   },
   computed: {
+    filteredData() {
+      return this.filterData(this.searchTerm, this.data, ['PartyName', 'BROKER'])
+    }
   },
   methods: {
-    getDataString(columns) {
-      var str = "";
-      columns.forEach((column) => {
-        if (!this.isBlank(column)) {
-          str = str + " " + column;
-        }
-      });
-      return str.trim();
-    },
     fetchData() {
       axios.post('api/report/roughPayment').then(response => {
         this.data = response.data
